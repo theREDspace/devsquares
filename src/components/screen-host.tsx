@@ -220,47 +220,49 @@ const Grid = ({ slug }: { slug: string }) => {
 					</div>
 				) : null}
 
-				{currentAnswer && game && game.state !== 'show-guesses' ? (
-					<div className="square-answer">
-						<p className="label">
-							Give the audience a few seconds to log their guesses
-						</p>
-						<div className="play-controls">
-							<button onClick={() => showGuesses({ game: game._id })}>
-								Show Audience Guesses
-							</button>
-						</div>
-					</div>
-				) : null}
+				{currentAnswer && game ? (
+          <>
+            {game.state !== 'show-guesses' && (
+              <div className="square-answer">
+                <p className="label">
+                  Give the audience a few seconds to log their guesses
+                </p>
+                <div className="play-controls">
+                  <button onClick={() => showGuesses({ game: game._id })}>
+                    Show Audience Guesses
+                  </button>
+                </div>
+              </div>
+            )}
 
-				{currentAnswer && game && game.state === 'show-guesses' ? (
-					<div className="square-answer">
-						<p className="label">Did the contestant guess correctly?</p>
-						<div className="play-controls">
-							<button
-								className="positive"
-								onClick={() => markX({ id: activeSquare._id, game: game!._id })}
-							>
-								Mark X
-							</button>
+            <div className="square-answer">
+              <p className="label">Did the contestant guess correctly?</p>
+              <div className="play-controls">
+                <button
+                  className="positive"
+                  onClick={() => markX({ id: activeSquare._id, game: game!._id })}
+                >
+                  Mark X
+                </button>
 
-							<button
-								className="positive"
-								onClick={() => markO({ id: activeSquare._id, game: game!._id })}
-							>
-								Mark O
-							</button>
+                <button
+                  className="positive"
+                  onClick={() => markO({ id: activeSquare._id, game: game!._id })}
+                >
+                  Mark O
+                </button>
 
-							<button
-								className="negative"
-								onClick={() =>
-									markIncorrect({ id: activeSquare._id, game: game!._id })
-								}
-							>
-								Incorrect
-							</button>
-						</div>
-					</div>
+                <button
+                  className="negative"
+                  onClick={() =>
+                    markIncorrect({ id: activeSquare._id, game: game!._id })
+                  }
+                >
+                  Incorrect
+                </button>
+              </div>
+            </div>
+          </>
 				) : null}
 			</div>
 		);

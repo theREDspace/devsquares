@@ -24,6 +24,8 @@ export default function Square({
 		>
 			<img src={square.photo!} alt={square.name} />
 
+      <h3 className="name">{square.name}</h3>
+
 			{square.secret
 				? Array(32)
 						.fill('')

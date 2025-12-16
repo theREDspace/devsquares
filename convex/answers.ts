@@ -74,10 +74,17 @@ export const calculate_score_by_user = query({
 			return false;
 		}
 
-		const answers = await ctx.db
+    const questions = await ctx.db
+      .query('questions')
+      .withIndex('by_complete', (q) => q.eq('complete', true))
+      .collect();
+
+    const questionIds = questions.map(q => q._id)
+
+		const answers = (await ctx.db
 			.query('answers')
 			.withIndex('by_question', (q) => q.eq('game', args.game!))
-			.collect();
+			.collect()).filter(a => questionIds.includes(a.question));
 
 		const guesses = await ctx.db
 			.query('guesses')

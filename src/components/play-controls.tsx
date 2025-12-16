@@ -26,7 +26,7 @@ export default function Controls({ slug }: { slug: string }) {
 	return (
 		<>
 			{guess ? (
-				<GuessDisplay voteIndicator={true} game={game?._id} />
+				game && game.state === 'show-guesses' && <GuessDisplay voteIndicator={true} game={game?._id} />
 			) : (
 				<div className="play-controls">
 					<h3>Do you agree that {square.name}’s answer is correct?</h3>
