@@ -228,6 +228,8 @@ export const list = query({
 	async handler(ctx) {
 		const squares = await ctx.db.query('squares').collect();
 
+    squares.sort((a, b) => a.location - b.location);
+
 		return Promise.all(
 			squares.map(async (square) => {
 				return {

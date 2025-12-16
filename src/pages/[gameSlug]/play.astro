@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/default.astro';
 import Title from '../../components/title';
-import ScreenAudience from '../../components/screen-audience';
+import ScreenPlay from '../../components/screen-play';
 
 const { gameSlug } = Astro.params;
 
@@ -14,7 +14,7 @@ if (!gameSlug) {
 	<main>
 		<Title />
 
-		<ScreenAudience client:only slug={gameSlug} />
+		<ScreenPlay client:only slug={gameSlug} />
 	</main>
 </Layout>
 
